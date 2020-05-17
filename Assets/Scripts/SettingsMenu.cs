@@ -43,9 +43,9 @@ public class SettingsMenu : MonoBehaviour
 
     public void Update()
     {
-        masterValue.text = Mathf.Ceil(masterSlider.value * 100f) + "%";
-        musicValue.text = Mathf.Ceil(musicSlider.value * 100f) + "%";
-        voiceValue.text = Mathf.Ceil(voiceSlider.value * 100f) + "%";
+        masterValue.text = Mathf.Ceil((masterSlider.value + 30f) * 2).ToString();
+        musicValue.text = Mathf.Ceil((musicSlider.value + 30f) * 2).ToString();
+        voiceValue.text = Mathf.Ceil((voiceSlider.value + 30f) * 2).ToString();
     }
 
     public void SetResolution(int resolutionIndex)

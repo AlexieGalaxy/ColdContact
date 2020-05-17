@@ -5,20 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public Animator transition;
+    public Animator transitionOut;
+
     public float transitionTime;
 
     public void LoadNextScene()
-    {
+    { 
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
     // Co-routine
     IEnumerator LoadLevel(int sceneIndex)
     {
-        // Play animation
-        transition.SetTrigger("Start");
-
         // Wait
         yield return new WaitForSeconds(transitionTime);
 
