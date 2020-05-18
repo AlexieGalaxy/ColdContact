@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: 2f4b58a6540093b4495380f06cd34a3e
+  - enabled: 1
+    path: Assets/Scenes/CableCar.unity
+    guid: ce2b643799e698c419bad443bee47437
+  - enabled: 1
+    path: Assets/Scenes/MainGame2.unity
+    guid: 3f6ef591541c343468bb5dd05d563573
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: cc6acc3b9477e2a4e8251625170af407
   m_configObjects: {}

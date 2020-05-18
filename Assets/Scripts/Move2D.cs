@@ -8,8 +8,10 @@ public class Move2D : MonoBehaviour
     public bool mirror = false;
     public Animator animator;
     private Rigidbody2D body;
-    public Collider2D[] ground;
     public SpriteRenderer sr;
+    private bool onGround = false;
+    public PhysicsMaterial2D physicsMat;
+    public PhysicsMaterial2D physicsMat0;
 
     // Start is called before the first frame update
     void Start()
@@ -19,12 +21,35 @@ public class Move2D : MonoBehaviour
 
     void Update()
     {
-        Jump();
+        if (onGround && Input.GetKeyDown("space"))
+        {
+            body.AddForce(new Vector2(0f, 8.5f), ForceMode2D.Impulse);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position + new Vector3(0.03f, -0.5f, 0f), 0.1f);
+
+        onGround = false;
+
+        foreach (Collider2D collider in hits)
+        {
+            if (collider.tag == "Ground")
+            {
+                onGround = true;
+                break;
+            }
+        }
+        if (!onGround)
+        {
+            body.sharedMaterial = physicsMat0;
+        } else
+        {
+            body.sharedMaterial = physicsMat;
+        }
+
         Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), 0f, 0f);
 
         animator.SetFloat("Speed", movement.x);
@@ -46,15 +71,10 @@ public class Move2D : MonoBehaviour
 
     }
 
-    void Jump()
+    void OnDrawGizmosSelected()
     {
-        if (Input.GetKeyDown("space")) {
-            foreach (Collider2D collider in ground) {
-                if (body.IsTouching(collider))
-                {
-                    body.AddForce(new Vector2(0f, 7f), ForceMode2D.Impulse);
-                }
-            }
-        }
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position + new Vector3(0.03f, -0.5f, 0f), 0.1f);
     }
 }
